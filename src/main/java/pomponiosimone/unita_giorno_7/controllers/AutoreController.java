@@ -36,5 +36,9 @@ public class AutoreController {
     private Autore findUserByIdAndUpdate(@PathVariable int autoreId, @RequestBody Autore body){
         return autoreService.findByIdAndUpdate(autoreId, body);
     }
+    //elimina tramite id
+    @DeleteMapping("/{autoreId}")
+    private void findAutoreByIdAndDelete(@PathVariable int autoreId){
+        autoreService.findByIdAndDelete(autoreId);}
     }
 
