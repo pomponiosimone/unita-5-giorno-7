@@ -23,6 +23,18 @@ public class AutoreController {
     @PostMapping()
     public Autore CreateAutore(@RequestBody Autore body) {
         return autoreService.saveAutore(body);
-
     }
-}
+    //trova tramite id
+
+        @GetMapping("/{autoreId}")
+        private Autore getAutoreById(@PathVariable int autoreId){
+            return autoreService.findById(autoreId);
+        }
+
+    //trova tramite id e modifica
+    @PutMapping("/{autoreId}")
+    private Autore findUserByIdAndUpdate(@PathVariable int autoreId, @RequestBody Autore body){
+        return autoreService.findByIdAndUpdate(autoreId, body);
+    }
+    }
+

@@ -2,6 +2,7 @@ package pomponiosimone.unita_giorno_7.services;
 
 import org.springframework.stereotype.Service;
 import pomponiosimone.unita_giorno_7.entities.Autore;
+import pomponiosimone.unita_giorno_7.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,8 @@ public class AutoreService {
     public List<Autore> findAll() {
         return this.autoreList;
     }
-    //Salvataggio creazione
 
+    //Salvataggio creazione
 public Autore saveAutore(Autore body) {
     Random rndm = new Random();
     body.setId(rndm.nextInt(1, 100));
@@ -32,6 +33,27 @@ public Autore saveAutore(Autore body) {
 }
 
 // Trova tramite id
-    
+public Autore findById(int autoreId){
+    Autore found = null;
+    for (Autore autore: this.autoreList){
+        if(autore.getId() == autoreId) found = autore;
+    }
+    if (found == null ) throw new NotFoundException(autoreId);
+    return found;
+}
+
+//trova tramite id e modifica
+
+public Autore findByIdAndUpdate(int autoreId, Autore updatedAutore){
+    Autore found = null;
+    for (Autore autore: this.autoreList){
+        if(autore.getId() == autoreId)
+            found = autore;
+        found.setNome(updatedAutore.getNome());
+        found.setCognome(updatedAutore.getCognome());
+    }
+    if (found == null ) throw new NotFoundException(autoreId);
+    return found;
+}
 }
 
